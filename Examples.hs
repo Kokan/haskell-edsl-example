@@ -15,3 +15,6 @@ f5' = (input :: Stream Int) >>> foreach (<10) >>> group 3 true (&&) >>> output
 
 f6 = (input :: Stream Int) >>> group 3 0 (+) >>> foreach (==10) >>> output
 
+-- only works with shallow embedding and not with deep as max exists in haskell only
+-- fmax = (input :: Stream Int) >>> group 3 0 (max) >>> output
+
