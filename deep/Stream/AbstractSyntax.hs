@@ -19,6 +19,7 @@ data Elem a where
 
 data Stream a where
     Input   :: (StreamType a) => Stream a
+    ConstInput :: (StreamType a) => a -> Stream a
     Output  :: (StreamType a) => Stream a -> Stream Void
     ForEach :: (StreamType a, StreamType b) =>
         (Elem a -> Elem b) -> Stream a -> Stream b

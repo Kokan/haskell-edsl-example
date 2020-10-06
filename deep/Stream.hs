@@ -4,7 +4,7 @@ module Stream (
     false, true, (&&), (||), not,
     (<), (>), (<=), (>=), (==),
     (+), (-), (*), negate, signum, abs, 
-    Stream, Int, Bool, input, output, foreach, group, (>>>),
+    Stream, Int, Bool, input, constinput, output, foreach, group, (>>>),
     execute, compile, compileToFile) where
 
 import Data.List hiding (group)
@@ -63,6 +63,9 @@ not a = App (Symbol "!" Prelude.not) a
 
 input :: (StreamType a) => Stream a
 input = Input
+
+constinput :: (StreamType a) => a -> Stream a
+constinput = ConstInput
 
 output :: (StreamType a) => Stream a -> Stream Void
 output = Output

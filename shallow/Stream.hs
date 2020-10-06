@@ -14,6 +14,10 @@ input = do
     line <- getLine
     return $ read line
 
+constinput :: (StreamType a) => a -> IO a
+constinput a = do
+    return $ a
+
 output :: (StreamType a) => IO a -> IO ()
 output str = do
     a <- str

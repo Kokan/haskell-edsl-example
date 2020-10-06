@@ -7,6 +7,8 @@ execute :: (StreamType a) => Stream a -> IO a
 execute Input = do
     line <- getLine
     return $ read line
+execute (ConstInput a) = do
+    return $ a
 execute (Output str) = do
     val <- execute str
     putStrLn $ show val

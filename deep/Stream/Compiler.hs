@@ -56,6 +56,10 @@ compile'' (Input :: Stream a) = do
     return $
         (typeName @ a) ++ " " ++ v ++ ";\n" ++
         "std::cin >> " ++ v ++ ";\n"
+compile'' (ConstInput a :: Stream a) = do
+    v <- newVar
+    return $
+        "const " ++ (typeName @ a) ++ " " ++ v ++ " = " ++ show a ++ ";\n"
 compile'' (Output input) = do
     inputPrg <- compile'' input
     prev <- var
