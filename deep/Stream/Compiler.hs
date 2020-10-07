@@ -60,6 +60,8 @@ compile'' (ConstInput a :: Stream a) = do
     v <- newVar
     return $
         "const " ++ (typeName @ a) ++ " " ++ v ++ " = " ++ show a ++ ";\n"
+compile'' (Skip str) = do
+     return $ "//skip\n"
 compile'' (Output input) = do
     inputPrg <- compile'' input
     prev <- var

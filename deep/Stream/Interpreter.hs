@@ -9,6 +9,9 @@ execute Input = do
     return $ read line
 execute (ConstInput a) = do
     return $ a
+execute (Skip str) = do
+    val <- execute str
+    return val
 execute (Output str) = do
     val <- execute str
     putStrLn $ show val
