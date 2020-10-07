@@ -28,6 +28,9 @@ infixl 1 >>>
 (>>>) :: IO a -> (IO a -> IO b) -> IO b
 a >>> f = f a
 
+skip :: (StreamType a) => IO a -> IO a
+skip x = x
+
 foreach :: (StreamType a, StreamType b) => (a -> b) -> IO a -> IO b
 foreach f str = do
     a <- str
