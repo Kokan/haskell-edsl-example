@@ -20,6 +20,7 @@ instance StreamType Void where
 instance Show (Elem a) where
     show (Symbol name _) = name
     show (Var v) = v
+    show (App (App (App (Symbol triop _) c) a) b) = "( (" ++ show c ++ ") ? (" ++ show a ++ ") : (" ++ show b ++ ") )"
     show (App (App (Symbol binop _) a) b) = "(" ++ show a ++ " " ++ binop ++ " " ++ show b ++ ")"
     show (App (Symbol f _) a) = f ++ "(" ++ show a ++ ")"
     show _ = error "Unsupported expression."

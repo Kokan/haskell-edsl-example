@@ -3,7 +3,7 @@
 module Stream (
     false, true, (&&), (||), not,
     (<), (>), (<=), (>=), (==),
-    (+), (-), (*), negate, signum, abs, 
+    (+), (-), (*), negate, signum, abs, if',
     Stream, Int, Bool, input, constinput, skip, output, foreach, group, (>>>),
     execute, compile, compileToFile) where
 
@@ -73,6 +73,13 @@ output = Output
 skip :: (StreamType a) =>
     Stream a -> Stream a
 skip = Skip
+
+cond :: Bool -> a -> a -> a
+cond True  a _ = a
+cond False _ b = b
+
+if' :: Elem Bool -> Elem Int -> Elem Int -> Elem Int
+if' c a b = App (App (App (Symbol "if'" (cond)) c) a) b
 
 foreach :: (StreamType a, StreamType b) =>
     (Elem a -> Elem b) -> Stream a -> Stream b

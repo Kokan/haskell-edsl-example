@@ -31,6 +31,10 @@ a >>> f = f a
 skip :: (StreamType a) => IO a -> IO a
 skip x = x
 
+if' :: Bool -> a -> a -> a
+if' True a _ = a
+if' _    _ b = b
+
 foreach :: (StreamType a, StreamType b) => (a -> b) -> IO a -> IO b
 foreach f str = do
     a <- str

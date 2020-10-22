@@ -20,3 +20,5 @@ fconst = (constinput 1 :: Stream Int) >>> output
 -- only works with shallow embedding and not with deep as max exists in haskell only
 -- fmax = (input :: Stream Int) >>> group 3 0 (max) >>> output
 
+f7' = (input :: Stream Int) >>> group 3 0 (\m c -> if' (c > m) c m) >>> output
+
