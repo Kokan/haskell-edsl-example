@@ -31,6 +31,9 @@ execute (Group n init f str)
     | otherwise = do
         val <- execute str
         execute $ Group (n-1) (Symbol "" $ eval $ f init $ Symbol "" val) f str
+execute (GroupN init f str) = do
+    n <- execute str
+    execute $ (Group n init f str)
 
 eval :: Elem a -> a
 eval (Symbol _ val) = val

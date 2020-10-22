@@ -4,7 +4,7 @@ module Stream (
     false, true, (&&), (||), not,
     (<), (>), (<=), (>=), (==),
     (+), (-), (*), negate, signum, abs, if', filter',
-    Stream, Int, Bool, input, constinput, skip, output, foreach, group, (>>>),
+    Stream, Int, Bool, input, constinput, skip, output, foreach, group, groupN, (>>>),
     execute, compile, compileToFile) where
 
 import Data.List hiding (group)
@@ -92,6 +92,9 @@ foreach = ForEach
 group :: (StreamType a, StreamType b) =>
     Int -> Elem b -> (Elem b -> Elem a -> Elem b) -> Stream a -> Stream b
 group = Group
+
+groupN :: Elem Int -> (Elem Int -> Elem Int -> Elem Int) -> Stream Int -> Stream Int
+groupN = GroupN
 
 infixl 1 >>>
 (>>>) :: (StreamType a, StreamType b) =>

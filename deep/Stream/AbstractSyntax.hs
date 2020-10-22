@@ -27,4 +27,5 @@ data Stream a where
         (Elem a -> Elem b) -> Stream a -> Stream b
     Group   :: (StreamType a, StreamType b) =>
         Int -> Elem b -> (Elem b -> Elem a -> Elem b) -> Stream a -> Stream b
+    GroupN  :: Elem Int -> (Elem Int -> Elem Int -> Elem Int) -> Stream Int -> Stream Int
 

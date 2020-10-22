@@ -92,6 +92,20 @@ compile'' (Group n init (f :: Elem b -> Elem a -> Elem b) input) = do
         indent 1 inputPrg ++
         "  " ++ next ++ " = " ++ show (f (Var next) (Var prev)) ++ ";\n" ++
         "}\n"
+compile'' (GroupN init (f :: Elem Int -> Elem Int -> Elem Int) input) = do
+    inputPrgN <- compile'' input
+    n <- var
+    inputPrg <- compile'' input
+    prev <- var
+    i <- newVar
+    next <- newVar
+    return $
+        inputPrgN ++ "\n" ++
+        (typeName @ Int) ++ " " ++ next ++ " = " ++ show init ++ ";\n" ++
+        "for(int " ++ i ++ " = 0; " ++ i ++ " < " ++ n ++ "; ++" ++ i ++ ") {\n" ++
+        indent 1 inputPrg ++
+        "  " ++ next ++ " = " ++ show (f (Var next) (Var prev)) ++ ";\n" ++
+        "}\n"
 
 indent :: Int -> String -> String
 indent n str = unlines $ map ((replicate (2*n) ' ')++) $ lines str

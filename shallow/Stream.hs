@@ -56,6 +56,11 @@ group n init f str
         a <- str
         group (n-1) (f init a) f str
 
+groupN :: (StreamType b) => b -> (b -> Int -> b) -> IO Int -> IO b
+groupN init f str = do
+   n <- str
+   group n init f str
+
 true :: Bool
 true = True
 

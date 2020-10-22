@@ -24,4 +24,6 @@ f7' = (input :: Stream Int) >>> group 3 0 (\m c -> if' (c > m) c m) >>> output
 
 f8 = (input :: Stream Int) >>> filter' (>5) >>> output
 
+f9 = (input :: Stream Int) >>> groupN 0 (+) >>> output
+f9' = (input :: Stream Int) >>> filter' (<100) >>> groupN 0 (+) >>> output
 
