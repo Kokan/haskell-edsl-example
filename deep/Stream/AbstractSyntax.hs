@@ -21,6 +21,7 @@ data Stream a where
     Input   :: (StreamType a) => Stream a
     ConstInput :: (StreamType a) => a -> Stream a
     Output  :: (StreamType a) => Stream a -> Stream Void
+    Filter  :: (StreamType a) => (Elem a -> Elem Bool) -> Stream a -> Stream a
     Skip    :: (StreamType a) => Stream a -> Stream a
     ForEach :: (StreamType a, StreamType b) =>
         (Elem a -> Elem b) -> Stream a -> Stream b

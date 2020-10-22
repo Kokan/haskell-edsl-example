@@ -35,6 +35,15 @@ if' :: Bool -> a -> a -> a
 if' True a _ = a
 if' _    _ b = b
 
+filter' :: (StreamType a) => (a -> Bool) -> IO a -> IO a
+filter' f str = do
+    a <- str
+    if f a
+    then
+       return a
+    else
+       filter' f str
+
 foreach :: (StreamType a, StreamType b) => (a -> b) -> IO a -> IO b
 foreach f str = do
     a <- str

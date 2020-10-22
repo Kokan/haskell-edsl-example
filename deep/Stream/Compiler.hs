@@ -69,6 +69,10 @@ compile'' (Output input) = do
     return $
         inputPrg ++
         "std::cout << " ++ prev ++ " << std::endl;\n"
+compile'' (Filter (f :: Elem a -> Elem Bool) input) = do
+    inputPrg <- compile'' input
+    cur <- var
+    return $ inputPrg ++ "if (" ++ (show (f (Var cur))) ++ ") continue;\n"
 compile'' (ForEach (tr :: Elem a -> Elem b) input) = do
     inputPrg <- compile'' input
     prev <- var

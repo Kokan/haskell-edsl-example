@@ -16,6 +16,13 @@ execute (Output str) = do
     val <- execute str
     putStrLn $ show val
     execute (Output str)
+execute (Filter f str) = do
+    val <- execute str
+    if eval $ f $ Symbol "" val
+    then
+       return $ val
+    else
+       execute (Filter f str)
 execute (ForEach f str) = do
     val <- execute str
     return $ eval $ f $ Symbol "" val
